@@ -27,9 +27,8 @@ public class GetBoardController implements Controller {
 		
 		// 3. Session ¿˙¿Â
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = request.getSession(); 
-		session.setAttribute("board", board);
 		mav.setViewName("getBoard.jsp");
+		mav.addObject("board", board);
 		return mav;
 	}
 	

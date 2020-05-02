@@ -28,9 +28,8 @@ public class GetBoardListController implements Controller {
 		
 		//3. 검색 결과를 세션에 저장하고 이동할 화면 이름 리턴, getBoardList.jsp
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = request.getSession(); 
-		session.setAttribute("boardList", boardList);	
 		mav.setViewName("getBoardList.jsp");
+		mav.addObject("boardList", boardList);
 		return mav;
 	}
 }
