@@ -22,8 +22,15 @@
 	<bean id="login" class="com.leeyunbo.view.user.LoginController"></bean>
 	<bean id="logout" class="com.leeyunbo.view.user.LogoutController"></bean>
 	<bean id="getBoardList" class="com.leeyunbo.view.board.GetBoardListController"></bean>
-	<bean id="insertBoardList" class="com.leeyunbo.view.board.InsertBoardController"></bean>
+	<bean id="insertBoard" class="com.leeyunbo.view.board.InsertBoardController"></bean>
 	<bean id="getBoard" class="com.leeyunbo.view.board.GetBoardController"></bean>
 	<bean id="deleteBoard" class="com.leeyunbo.view.board.DeleteBoardController"></bean>
 	<bean id="updateBoard" class="com.leeyunbo.view.board.UpdateBoardController"></bean>
+	
+	
+	<!-- ViewResolver 등록 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/board/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
 </beans>
