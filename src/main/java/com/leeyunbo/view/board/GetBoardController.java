@@ -11,11 +11,12 @@ import com.leeyunbo.biz.board.impl.BoardDAO;
 public class GetBoardController{
 
 	@RequestMapping("/getBoard.do")
-	public ModelAndView handleRequest(BoardVO vo, BoardDAO boardDAO, ModelAndView mav) {
+	public ModelAndView getBoard(BoardVO vo, BoardDAO boardDAO, ModelAndView mav) {
 		System.out.println("글 상세 조회 처리");
+		
 		// 1. 검색할 게시글 번호 추출 Spring Container throw 
 		// 2. DB 연동 처리 Spring Container throw 
-		// 3. Session 저장
+		// 3. ModelAndView 객체 설정
 		mav.setViewName("getBoard.jsp");
 		mav.addObject("board", boardDAO.getBoard(vo));
 		return mav;

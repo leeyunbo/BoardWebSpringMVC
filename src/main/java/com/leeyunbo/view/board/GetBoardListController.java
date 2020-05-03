@@ -13,7 +13,7 @@ import com.leeyunbo.biz.board.impl.BoardDAO;
 public class GetBoardListController {
 
 	@RequestMapping("/getBoardList.do")
-	public ModelAndView handleRequest(BoardVO vo, BoardDAO boardDAO, ModelAndView mav) {
+	public ModelAndView getBoardList(BoardVO vo, BoardDAO boardDAO, ModelAndView mav) {
 		System.out.println("글 목록 검색 처리");
 		
 		//1. 사용자 입력 정보 추출(검색 기능 이후에 구현) Spring Container throw 
