@@ -2,34 +2,29 @@ package com.leeyunbo.view.board;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
 
 import com.leeyunbo.biz.board.BoardVO;
 import com.leeyunbo.biz.board.impl.BoardDAO;
 
-public class GetBoardListController implements Controller {
+@Controller
+public class GetBoardListController {
 
-	@Override
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/getBoardList.do")
+	public ModelAndView handleRequest(BoardVO vo, BoardDAO boardDAO, ModelAndView mav) {
 		System.out.println("글 목록 검색 처리");
 		
-		//1. 사용자 입력 정보 추출(검색 기능 이후에 구현) 
+		//1. 사용자 입력 정보 추출(검색 기능 이후에 구현) Spring Container throw 
 		BoardVO boardVO = new BoardVO();
 		
-		//2. DB 연동 처리 
-		BoardDAO boardDAO = new BoardDAO();
-		List<BoardVO> boardList = boardDAO.getBoardList();
+		//2. DB 연동 처리, Spring Container throw 
 		
 		
 		//3. 검색 결과를 세션에 저장하고 이동할 화면 이름 리턴, getBoardList.jsp
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("getBoardList");
-		mav.addObject("boardList", boardList);
+		mav.addObject("boardList", boardDAO.getBoardList());
+		mav.setViewName("getBoardList.jsp");
 		return mav;
 	}
 }
