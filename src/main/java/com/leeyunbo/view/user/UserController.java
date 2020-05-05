@@ -22,13 +22,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login.do", method=RequestMethod.POST)
-	public String login(UserVO vo, UserDAO userDAO) {
+	public String login(UserVO vo, UserDAO userDAO, HttpSession session) {
 		System.out.println("로그인 처리");
 		
 		// 사용자 입력 추출 Spring Container throw 
 		// DB 연동 처리 Spring Container throw 	
 		// 화면 네비게이션 & DB 로직 처리 
-		if(userDAO.getUser(vo) != null) {
+		UserVO user = userDAO.getUser(vo);
+		if(user != null) {
+			session.setAttribute("userName", user.getName());
 			return "getBoardList.do";
 		} else {
 			return "login.jsp";

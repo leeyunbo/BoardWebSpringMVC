@@ -1,8 +1,8 @@
 package com.leeyunbo.view.board;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.leeyunbo.biz.board.BoardVO;
 import com.leeyunbo.biz.board.impl.BoardDAO;
@@ -23,28 +23,27 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/getBoard.do")
-	public ModelAndView getBoard(BoardVO vo, BoardDAO boardDAO, ModelAndView mav) {
+	public String getBoard(BoardVO vo, BoardDAO boardDAO, Model model) {
 		System.out.println("글 상세 조회 처리");
 		
 		// 1. 검색할 게시글 번호 추출 Spring Container throw 
 		// 2. DB 연동 처리 Spring Container throw 
-		// 3. ModelAndView 객체 설정
-		mav.setViewName("getBoard.jsp");
-		mav.addObject("board", boardDAO.getBoard(vo));
-		return mav;
+		// 3. 객체 지정
+		// 4. 화면 리턴
+		model.addAttribute("board", boardDAO.getBoard(vo));
+		return "getBoard.jsp";
 	}
 	
 	@RequestMapping("/getBoardList.do")
-	public ModelAndView getBoardList(BoardVO vo, BoardDAO boardDAO, ModelAndView mav) {
+	public String getBoardList(BoardVO vo, BoardDAO boardDAO, Model model) {
 		System.out.println("글 목록 검색 처리");
 		
 		//1. 사용자 입력 정보 추출(검색 기능 이후에 구현) Spring Container throw
 		//2. DB 연동 처리, Spring Container throw 
-		//3. ModelAndView 객체 설정
-		BoardVO boardVO = new BoardVO();
-		mav.addObject("boardList", boardDAO.getBoardList());
-		mav.setViewName("getBoardList.jsp");
-		return mav;
+		//3. 객체 지정 
+		//4. 화면 리턴
+		model.addAttribute("boardList", boardDAO.getBoardList());
+		return "getBoardList.jsp";
 	}
 	
 	@RequestMapping(value="/insertBoard.do")
