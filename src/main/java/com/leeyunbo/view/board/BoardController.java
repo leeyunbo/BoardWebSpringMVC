@@ -3,6 +3,7 @@ package com.leeyunbo.view.board;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.leeyunbo.biz.board.BoardVO;
 import com.leeyunbo.biz.board.impl.BoardDAO;
@@ -35,14 +36,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/getBoardList.do")
-	public String getBoardList(BoardVO vo, BoardDAO boardDAO, Model model) {
+	public String getBoardList(@RequestParam(value="searchCondition", defaultValue="TITLE",
+			required=false) String condition,
+			@RequestParam(value="searchKeyword", defaultValue="",
+			required=false) String keyword, BoardVO vo, BoardDAO boardDAO, Model model) {
 		System.out.println("글 목록 검색 처리");
 		
 		//1. 사용자 입력 정보 추출(검색 기능 이후에 구현) Spring Container throw
 		//2. DB 연동 처리, Spring Container throw 
 		//3. 객체 지정 
 		//4. 화면 리턴
-		model.addAttribute("boardList", boardDAO.getBoardList());
+		model.addAttribute("boardList", boardDAO.getBoardList(vo));
 		return "getBoardList.jsp";
 	}
 	
