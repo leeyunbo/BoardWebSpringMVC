@@ -28,4 +28,5 @@ ViewResolver, HandlerMapping, DispathcerServlet 활용
 ```
 1. 로그인, 로그아웃 기능
 2. 게시물 등록, 수정, 삭제 기능
+3. 게시물 검색 기능
 ```
