@@ -20,7 +20,7 @@ ViewResolver, HandlerMapping, DispathcerServlet 활용
 2. SimpleUrlHandlerMapping을 통해 해당되는 Controller를 검색함 
 3. DispatcherServlet은 해당 Controller를 실행하여 요청을 처리함 
 4. Controller는 검색결과를 담고 있는 객체(VO or List<VO>)와 이동할 화면의 이름을 ModelAndView 객체에 담아 반환시킴 
-5. DispatcherServlet은 ModelAndView로부터 view 정보를 추출하고, ViewResolver를 이용하여 응답으로 사용할 화면의 이름을 검색함
+5. DispatcherServlet은 view 정보와 model을 추출하고, ViewResolver를 이용하여 응답으로 사용할 화면의 이름을 검색함
 6. DispatcherServlet은 해당 화면을 실행하여 결과를 전송함
 ```
 
