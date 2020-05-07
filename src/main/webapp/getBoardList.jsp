@@ -18,8 +18,9 @@
 	<tr>
 		<td align="right">
 			<select name="searchCondition">
-			<option value="TITLE">
-			<option value="CONTENT"> 
+			<c:forEach items="${conditionMap}" var="option">
+				<option value="${option.value}">${option.key }
+			</c:forEach>
 			</select>
 			<input name="searchKeyword" tpye="text"/> 
 			<input type="submit" value="°Ë»ö"/> 
