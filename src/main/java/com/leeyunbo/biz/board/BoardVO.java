@@ -8,6 +8,8 @@ package com.leeyunbo.biz.board;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVO {
 	private int seq;
 	private String title; 
@@ -16,8 +18,18 @@ public class BoardVO {
 	private Date regDate; 
 	private String searchCondition;
 	private String searchKeyword;
+	private String uploadFileName;
+	private MultipartFile uploadFile;
+	private int cnt;
+	
 	public String getSearchCondition() {
 		return searchCondition;
+	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
 	}
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
@@ -28,8 +40,6 @@ public class BoardVO {
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
 	}
-	private int cnt;
-	
 	public int getSeq() {
 		return seq;
 	}
@@ -72,5 +82,11 @@ public class BoardVO {
 				+ writer + ", content=" + content + ", regDate=" 
 				+ regDate + ", cnt=" +cnt + ", searchCondition=" 
 				+ searchCondition + ",searchKeyword=" + searchKeyword +"]";		
+	}
+	public String getUploadFileName() {
+		return uploadFileName;
+	}
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
 	}
 }

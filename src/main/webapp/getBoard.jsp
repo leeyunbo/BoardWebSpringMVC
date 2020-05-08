@@ -34,6 +34,10 @@
 		<td align="left">${board.cnt }</td>
 	</tr>
 	<tr>
+		<td bgcolor="orange">업로드 파일</td>
+		<td align="left">${board.uploadFileName }</td>
+	</tr>
+	<tr>
 		<td colspan="2" align="center">
 			<input type="submit" value="글 수정"/>
 		</td>

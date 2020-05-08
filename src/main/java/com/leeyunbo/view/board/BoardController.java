@@ -1,5 +1,7 @@
 package com.leeyunbo.view.board;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,11 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.leeyunbo.biz.board.BoardService;
 import com.leeyunbo.biz.board.BoardVO;
-import com.leeyunbo.biz.board.impl.BoardDAO;
 
 @Controller
 public class BoardController {
@@ -74,11 +75,23 @@ public class BoardController {
 	
 	// 글 작성 
 	@RequestMapping(value="/insertBoard.do")
-	public String insertBoard(BoardVO vo) {
+	public String insertBoard(BoardVO vo) throws IOException {
 		System.out.println("글 등록 처리");
 		
-		//1. 사용자 입력 정보 추출 Spring Container throw  
-		//2. DB 연동 처리 Spring Container throw
+		//사용자 입력 정보 추출 Spring Container throw
+		//파일 처리 
+		//DB 연동 처리 Spring Container throw
+		MultipartFile uploadFile = vo.getUploadFile(); 
+		if(!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename(); 
+			System.out.println(fileName);
+			uploadFile.transferTo(new File("E:/" + fileName));
+			vo.setUploadFileName(fileName);
+		}
+		else {
+			vo.setUploadFileName("파일 없음");
+		}
+		
 		boardService.insertBoard(vo); 
 		return "getBoardList.do";
 	}

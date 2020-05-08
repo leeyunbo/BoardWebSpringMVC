@@ -28,6 +28,10 @@ public class UserController {
 		// 사용자 입력 추출 Spring Container throw 
 		// DB 연동 처리 Spring Container throw 	
 		// 화면 네비게이션 & DB 로직 처리 
+		if(vo.getId() == null | vo.getId().equals("")) {
+			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
+		}
+		
 		UserVO user = userDAO.getUser(vo);
 		if(user != null) {
 			session.setAttribute("userName", user.getName());
