@@ -55,17 +55,19 @@ public class BoardController {
 	}
 	
 	// 글 목록 조회
+	// @RequestParam(value="searchCondition", defaultValue="TITLE",required=false) String condition
+	// @RequestParam(value="searchKeyword", defaultValue="",required=false) String keyword
 	@RequestMapping("/getBoardList.do")
-	public String getBoardList(
-			@RequestParam(value="searchCondition", defaultValue="TITLE",required=false) String condition,
-			@RequestParam(value="searchKeyword", defaultValue="",required=false) String keyword, 
-			BoardVO vo, Model model) {
+	public String getBoardList(BoardVO vo, Model model) {
 		System.out.println("글 목록 검색 처리");
-		
+	
 		//1. 사용자 입력 정보 추출(검색 기능 이후에 구현) Spring Container throw
 		//2. DB 연동 처리, Spring Container throw 
 		//3. 객체 지정 	
 		//4. 화면 리턴
+		if(vo.getSearchCondition() == null) vo.setSearchCondition("TITLE");
+		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
+		
 		model.addAttribute("boardList", boardService.getBoardList(vo));
 		return "getBoardList.jsp";
 	}
