@@ -11,7 +11,8 @@
 	<h1> YB 커뮤니티 </h1>
 	<hr>
 		<a href="login.do">로그인</a><br><br><br> 
-		<a href="getBoardList.do">게시판</a>
+		<a href="getBoardList.do">게시판</a><br><br><br>
+		<a href="dataTransform.do">글 목록 변환 처리</a><br>
 	<hr>
 </center>
 

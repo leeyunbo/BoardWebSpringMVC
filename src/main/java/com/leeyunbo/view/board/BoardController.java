@@ -3,6 +3,7 @@ package com.leeyunbo.view.board;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.leeyunbo.biz.board.BoardService;
@@ -51,6 +53,15 @@ public class BoardController {
 		// 2. DB 연동 처리 Spring Container throw 
 		// 3. 객체 지정
 		// 4. 화면 리턴
+		MultipartFile uploadFile = vo.getUploadFile(); 
+		if(!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename(); 
+			vo.setUploadFileName(fileName);
+		}
+		else {
+			vo.setUploadFileName("파일 없음");
+		}
+		
 		model.addAttribute("board", boardService.getBoard(vo));
 		return "getBoard.jsp";
 	}
@@ -86,10 +97,6 @@ public class BoardController {
 			String fileName = uploadFile.getOriginalFilename(); 
 			System.out.println(fileName);
 			uploadFile.transferTo(new File("E:/" + fileName));
-			vo.setUploadFileName(fileName);
-		}
-		else {
-			vo.setUploadFileName("파일 없음");
 		}
 		
 		boardService.insertBoard(vo); 
@@ -97,7 +104,6 @@ public class BoardController {
 	}
 	
 	// 글 수정
-	
 	@RequestMapping("/updateBoard.do")
 	public String updateBoard(BoardVO vo) {
 		System.out.println("글 수정 처리");
@@ -108,6 +114,16 @@ public class BoardController {
 		//4. 화면 네비게이션
 		boardService.updateBoard(vo);
 		return "getBoardList.do";
+	}
+	
+	// 데이터 변환 처리 
+	@RequestMapping("/dataTransform.do")
+	@ResponseBody
+	public List<BoardVO> dataTransform(BoardVO vo) {
+		vo.setSearchCondition("TITLE");
+		vo.setSearchKeyword("");
+		List<BoardVO> boardList = boardService.getBoardList(vo);
+		return boardList;
 	}
 
 }
