@@ -8,7 +8,7 @@
 	
 	<!-- Alias 설정 -->
 	<typeAliases>
-		<typeAlias type="#package.#modelname" alias="#modelname"></typeAlias>
+		<typeAlias type="com.leeyunbo.biz.board.BoardVO" alias="board"></typeAlias>
 	</typeAliases>
 	
 	<!-- DataSource 설정 -->

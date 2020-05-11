@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class SqlSessionFactoryBean {
 	private static SqlSessionFactory sessionFactory = null;
+	// 클래스 초기화 블록
 	static {
 		try {
 			if (sessionFactory == null) {
